@@ -1,0 +1,85 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/README.md b/README.md
+index a36a9e139a6561fc612c70c7ae230f41d92f44fb..ba470a24215eacd4ba1687707270168610fb9e8b 100644
+--- a/README.md
++++ b/README.md
+@@ -1,2 +1,74 @@
+-# ThaiBud
+-MC APP
++# ThaiBud – Medical Cannabis App
++
++ThaiBud includes a runnable FastAPI backend starter for a medical cannabis tracking app.
++
++## What is included
++
++- FastAPI backend scaffold
++- SQLite database with SQLModel
++- Patient profile endpoints
++- Product endpoints tied to each patient
++- Treatment session logging endpoints
++- Basic symptom insight summary endpoint
++- API validation for email format, symptom scores, and THC/CBD ranges
++- Product blueprint and MVP roadmap docs in `docs/`
++
++## Quick start
++
++```bash
++python -m venv .venv
++source .venv/bin/activate
++pip install -r requirements.txt
++uvicorn app.main:app --reload
++```
++
++Then open:
++- API docs: `http://127.0.0.1:8000/docs`
++- API root: `http://127.0.0.1:8000/`
++- Health check: `http://127.0.0.1:8000/health`
++
++## Core API routes
++
++- `POST /patients`
++- `GET /patients`
++- `POST /products`
++- `GET /products?patient_id={id}`
++- `POST /sessions`
++- `GET /sessions?patient_id={id}`
++- `GET /insights/{patient_id}`
++
++
++## Clone to Windows filesystem
++
++Use the helper script to clone this repository into the Windows mount path:
++
++```bash
++./scripts/clone_to_windows.sh
++```
++
++Default destination is `/mnt/c/ThaiBud` (Windows path: `C:\\ThaiBud`).
++
++You can also provide custom source and destination paths:
++
++```bash
++./scripts/clone_to_windows.sh /workspace/ThaiBud /mnt/c/Projects/ThaiBud
++```
++
++## Configuration
++
++- `THAIBUD_DATABASE_URL` (optional): override the default SQLite database URL (`sqlite:///./thaibud.db`).
++
++## Running tests
++
++```bash
++pytest -q
++```
++
++## Project docs
++
++- Product blueprint: `docs/app-blueprint.md`
++- MVP roadmap: `docs/mvp-roadmap.md`
++
++## Important
++
++This is a development starter and not medical or legal advice. Validate compliance, privacy, and clinical safety requirements for each target region before production use.
+ 
+EOF
+)
